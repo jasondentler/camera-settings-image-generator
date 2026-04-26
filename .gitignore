@@ -4,4 +4,6 @@ __pycache__/
 .venv/
 .env
 *_blurred.jpg
-*_metadata.txt
+*.txt
+!samples/*_blurred.jpg
+!samples/*.txt
