@@ -1,0 +1,9 @@
+[project]
+name = "Camera Settings Image Generator"
+version = "0.1.0"
+description = "Extracts camera settings and generates a heavily blurred copy with text overlays."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "Pillow>=10.0.0"
+]
