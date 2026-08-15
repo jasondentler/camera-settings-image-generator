@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageOps
 
 from src.processor import (
     classify_aspect_ratio,
@@ -93,6 +93,28 @@ class ProcessorTests(unittest.TestCase):
         splits = split_landscape_image(image)
 
         self.assertEqual([split.size for split in splits], [(800, 1000)] * 2)
+
+    def test_landscape_split_blurs_outer_side_padding(self):
+        image = Image.new("RGB", (1500, 1000), "black")
+        draw = ImageDraw.Draw(image)
+        draw.rectangle((365, 0, 385, 999), fill="white")
+        draw.rectangle((1115, 0, 1135, 999), fill="white")
+
+        splits = split_landscape_image(image)
+        unblurred_background = ImageOps.fit(
+            image,
+            (800, 1000),
+            method=Image.Resampling.LANCZOS,
+        )
+
+        self.assertNotEqual(
+            splits[0].getpixel((25, 500)),
+            unblurred_background.getpixel((25, 500)),
+        )
+        self.assertNotEqual(
+            splits[1].getpixel((775, 500)),
+            unblurred_background.getpixel((775, 500)),
+        )
 
     @patch("src.processor.exiftool.ExifToolHelper", FakeExifToolHelper)
     def test_process_photo_copies_exact_4_5_portrait_post_image(self):

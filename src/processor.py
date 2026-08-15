@@ -54,6 +54,11 @@ def is_exact_4_5_portrait(width, height):
     return width < height and width * 5 == height * 4
 
 
+def make_blurred_fill_image(image, size):
+    background = ImageOps.fit(image, size, method=Image.Resampling.LANCZOS)
+    return background.filter(ImageFilter.GaussianBlur(radius=40)).convert("RGB")
+
+
 def make_4_5_portrait_image(image):
     image = image.convert("RGB")
     width, height = image.size
@@ -67,8 +72,7 @@ def make_4_5_portrait_image(image):
     else:
         canvas_size = (math.ceil(height * TARGET_PORTRAIT_RATIO), height)
 
-    background = ImageOps.fit(image, canvas_size, method=Image.Resampling.LANCZOS)
-    background = background.filter(ImageFilter.GaussianBlur(radius=40)).convert("RGB")
+    background = make_blurred_fill_image(image, canvas_size)
 
     output = background.copy()
     x = (canvas_size[0] - width) // 2
@@ -104,11 +108,7 @@ def split_landscape_image(image):
             crop_left = round(content_left - original_x)
             crop_right = round(content_right - original_x)
 
-            split_image = ImageOps.fit(
-                image,
-                (target_split_width, height),
-                method=Image.Resampling.LANCZOS,
-            )
+            split_image = make_blurred_fill_image(image, (target_split_width, height))
             if crop_right > crop_left:
                 crop = image.crop((crop_left, 0, crop_right, height))
                 paste_x = round(content_left - slice_left)
