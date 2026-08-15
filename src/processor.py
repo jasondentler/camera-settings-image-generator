@@ -49,6 +49,7 @@ def process_photo(input_path):
         default_iso = "Unknown"
         default_raw_date = "Unknown"
         default_raw_gps = "Unknown"
+        default_copyright = "Unknown Copyright"
         default_alt_text = "No alt text"
         default_caption = "No caption"
         default_title = "No title"
@@ -62,6 +63,7 @@ def process_photo(input_path):
             "iso": default_iso,
             "raw_date": default_raw_date,
             "raw_gps": default_raw_gps,
+            "copyright": default_copyright,
         }
 
         camera = metadata.get("EXIF:Model", default_camera)
@@ -74,6 +76,13 @@ def process_photo(input_path):
         iso = metadata.get("EXIF:ISO", metadata.get("EXIF:BaseISO", default_iso))
         raw_date = metadata.get("EXIF:DateTimeOriginal", default_raw_date)
         raw_gps = metadata.get("Composite:GPSPosition", default_raw_gps)
+        copyright_notice = metadata.get(
+            "EXIF:Copyright",
+            metadata.get(
+                "XMP:Rights",
+                metadata.get("IPTC:CopyrightNotice", default_copyright),
+            ),
+        )
 
         clean_date, clean_time = format_date_time(raw_date)
         gps_display, maps_url = format_gps(raw_gps)
@@ -113,6 +122,7 @@ def process_photo(input_path):
             clean_time,
             raw_gps,
             gps_display,
+            copyright_notice,
             defaults,
         )
 

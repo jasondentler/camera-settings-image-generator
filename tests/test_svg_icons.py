@@ -14,6 +14,7 @@ class SvgIconTests(unittest.TestCase):
             "shutter-speed.svg",
             "iso.svg",
             "focal-length.svg",
+            "copyright.svg",
             "date-time.svg",
             "gps-coordinates.svg",
             "camera-isometric.svg",

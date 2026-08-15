@@ -2,6 +2,7 @@ import unittest
 
 from src.formatters import (
     format_camera_model,
+    format_copyright_display_name,
     format_date_time,
     format_gear_display_name,
     format_gps,
@@ -86,6 +87,16 @@ class FormatterTests(unittest.TestCase):
         self.assertEqual(
             format_gear_display_name("super TELEPHOTO lens"),
             "Super Telephoto Lens",
+        )
+
+    def test_formats_copyright_display_name(self):
+        self.assertEqual(
+            format_copyright_display_name("© 2026 Jason Dentler, All Rights Reserved"),
+            "2026 Jason Dentler,\nAll Rights Reserved",
+        )
+        self.assertEqual(
+            format_copyright_display_name("2026 Jason Dentler, All Rights Reserved"),
+            "2026 Jason Dentler,\nAll Rights Reserved",
         )
 
 

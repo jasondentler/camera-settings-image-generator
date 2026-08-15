@@ -120,3 +120,12 @@ def format_gear_display_name(name):
         return word[0].upper() + word[1:].lower()
 
     return re.sub(r"\b[A-Za-z]{4,}\b", pascal_case_long_word, name)
+
+
+def format_copyright_display_name(copyright_notice):
+    """Formats copyright metadata for the image overlay."""
+    if not isinstance(copyright_notice, str):
+        return copyright_notice
+
+    copyright_notice = re.sub(r"^\s*©\s*", "", copyright_notice)
+    return re.sub(r",\s+(?=All Rights Reserved\b)", ",\n", copyright_notice)

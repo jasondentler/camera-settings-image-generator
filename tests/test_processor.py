@@ -34,6 +34,7 @@ class FakeExifToolHelper:
                 "EXIF:ISO": "12800",
                 "EXIF:DateTimeOriginal": "2026:07:27 15:42:00",
                 "Composite:GPSPosition": "Unknown",
+                "EXIF:Copyright": "© 2026 Jason Dentler, All Rights Reserved",
                 "EXIF:Software": "",
             }
         ]
@@ -66,6 +67,7 @@ class ProcessorTests(unittest.TestCase):
                 "🔍 Lens: FE 200-600mm F5.6-6.3 G OSS + 1.4X Teleconverter",
                 output_text_content,
             )
+            self.assertNotIn("Copyright", output_text_content)
             self.assertEqual(len(FakeExifToolHelper.instances), 2)
             self.assertIn(str(output_image), FakeExifToolHelper.instances[1].execute_args)
 

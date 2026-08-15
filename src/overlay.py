@@ -10,12 +10,20 @@ import os
 
 from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
 
-from src.formatters import format_gear_display_name, split_lens_extender
+from src.formatters import (
+    format_copyright_display_name,
+    format_gear_display_name,
+    split_lens_extender,
+)
 from src.svg_icons import get_icon_aspect, render_svg_icon
 
 
 BACKDROP_MAX_ALPHA = 210
 BACKDROP_ALPHA_MULTIPLIER = 0.95
+
+
+def get_multiline_spacing(font_size):
+    return max(4, int(font_size * 0.16))
 
 
 def get_text_color(image):
@@ -31,6 +39,7 @@ def measure_overlay_rows(draw, rows, font, font_size, icon_dir):
     row_gap = max(10, int(font_size * 0.38))
     divider_margin = max(10, int(font_size * 0.45))
     divider_height = max(1, int(font_size * 0.06))
+    multiline_spacing = get_multiline_spacing(font_size)
     ascent, descent = font.getmetrics()
     row_height = max(1, ascent + descent)
     text_metrics = []
@@ -39,13 +48,19 @@ def measure_overlay_rows(draw, rows, font, font_size, icon_dir):
         if row.get("divider"):
             continue
 
-        text_bbox = draw.textbbox((0, 0), row["text"], font=font)
+        if "\n" in row["text"]:
+            text_bbox = draw.multiline_textbbox(
+                (0, 0), row["text"], font=font, spacing=multiline_spacing
+            )
+        else:
+            text_bbox = draw.textbbox((0, 0), row["text"], font=font)
         text_metrics.append(
             {
                 "row": row,
                 "bbox": text_bbox,
                 "text_width": text_bbox[2] - text_bbox[0],
                 "visual_text_height": max(1, text_bbox[3] - text_bbox[1]),
+                "multiline_spacing": multiline_spacing if "\n" in row["text"] else 0,
             }
         )
 
@@ -82,12 +97,14 @@ def measure_overlay_rows(draw, rows, font, font_size, icon_dir):
             icon_w = icon_widths[row["icon"]]
             row_w = icon_column_width + icon_gap + text_metric["text_width"]
             width = max(width, row_w)
+            metric_height = max(row_height, text_metric["visual_text_height"])
             metric = {
                 "type": "row",
                 "row": row,
                 "bbox": text_metric["bbox"],
-                "height": row_height,
+                "height": metric_height,
                 "visual_text_height": text_metric["visual_text_height"],
+                "multiline_spacing": text_metric["multiline_spacing"],
                 "icon_height": icon_height,
                 "icon_width": icon_w,
                 "icon_column_width": icon_column_width,
@@ -170,7 +187,16 @@ def draw_overlay_backdrop(image, rows, layout, x, y, font, font_color, icon_dir)
             + (metric["height"] - metric["visual_text_height"]) // 2
             - metric["bbox"][1]
         )
-        mask_draw.text((text_x, text_y), row["text"], fill=255, font=font)
+        if "\n" in row["text"]:
+            mask_draw.multiline_text(
+                (text_x, text_y),
+                row["text"],
+                fill=255,
+                font=font,
+                spacing=metric["multiline_spacing"],
+            )
+        else:
+            mask_draw.text((text_x, text_y), row["text"], fill=255, font=font)
         current_y += metric["height"]
 
     blur_radius = max(4, int(layout["row_gap"] * 0.45))
@@ -211,7 +237,16 @@ def draw_overlay_rows(image, draw, rows, layout, x, y, font, font_color, icon_di
             + (metric["height"] - metric["visual_text_height"]) // 2
             - metric["bbox"][1]
         )
-        draw.text((text_x, text_y), row["text"], fill=font_color, font=font)
+        if "\n" in row["text"]:
+            draw.multiline_text(
+                (text_x, text_y),
+                row["text"],
+                fill=font_color,
+                font=font,
+                spacing=metric["multiline_spacing"],
+            )
+        else:
+            draw.text((text_x, text_y), row["text"], fill=font_color, font=font)
         current_y += metric["height"]
 
 
@@ -229,6 +264,7 @@ def build_overlay_rows(
     clean_time,
     raw_gps,
     gps_display,
+    copyright_notice,
     defaults,
 ):
     settings_rows = []
@@ -269,6 +305,14 @@ def build_overlay_rows(
                     "text": format_gear_display_name(extender),
                 }
             )
+
+    if copyright_notice and copyright_notice != defaults["copyright"]:
+        info_rows.append(
+            {
+                "icon": "copyright.svg",
+                "text": format_copyright_display_name(copyright_notice),
+            }
+        )
 
     rows = [*settings_rows]
     if settings_rows and info_rows:

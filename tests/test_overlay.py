@@ -7,6 +7,7 @@ from src.overlay import (
     build_overlay_rows,
     get_backdrop_alpha,
     get_backdrop_color,
+    get_multiline_spacing,
     measure_overlay_rows,
 )
 
@@ -24,6 +25,7 @@ DEFAULTS = {
     "iso": "Unknown",
     "raw_date": "Unknown",
     "raw_gps": "Unknown",
+    "copyright": "Unknown Copyright",
 }
 
 
@@ -43,6 +45,7 @@ class OverlayTests(unittest.TestCase):
             "10:05 AM",
             "29.57362742 -94.39025578",
             '29° 34\' 25.06" N, 94° 23\' 24.92" W',
+            "© 2026 Jason Dentler, All Rights Reserved",
             DEFAULTS,
         )
 
@@ -59,11 +62,13 @@ class OverlayTests(unittest.TestCase):
                 "camera-isometric.svg",
                 "lens-isometric.svg",
                 "teleconverter.svg",
+                "copyright.svg",
             ],
         )
         self.assertEqual(rows[5]["text"], "Fri, 03 Apr 2026 10:05 AM")
         self.assertEqual(rows[8]["text"], "RF 100-400mm ƒ/5.6-8 IS USM")
         self.assertEqual(rows[9]["text"], "Extender RF 1.4x")
+        self.assertEqual(rows[10]["text"], "2026 Jason Dentler,\nAll Rights Reserved")
 
     def test_builds_sony_teleconverter_rows(self):
         rows = build_overlay_rows(
@@ -80,6 +85,7 @@ class OverlayTests(unittest.TestCase):
             "3:42 PM",
             "Unknown",
             "Unknown",
+            "© 2026 Jason Dentler, All Rights Reserved",
             DEFAULTS,
         )
 
@@ -88,6 +94,7 @@ class OverlayTests(unittest.TestCase):
         self.assertEqual(rows[8]["icon"], "teleconverter.svg")
         self.assertEqual(rows[7]["text"], "FE 200-600mm ƒ/5.6-6.3 G OSS")
         self.assertEqual(rows[8]["text"], "1.4x Teleconverter")
+        self.assertEqual(rows[9]["icon"], "copyright.svg")
 
     def test_omits_default_values_and_divider_when_only_settings_exist(self):
         rows = build_overlay_rows(
@@ -104,6 +111,7 @@ class OverlayTests(unittest.TestCase):
             "",
             "Unknown",
             "Unknown",
+            "Unknown Copyright",
             DEFAULTS,
         )
 
@@ -130,6 +138,7 @@ class OverlayTests(unittest.TestCase):
             "3:42 PM",
             "Unknown",
             "Unknown",
+            "Unknown Copyright",
             DEFAULTS,
         )
         image = Image.new("RGB", (1080, 1440), "white")
@@ -142,6 +151,39 @@ class OverlayTests(unittest.TestCase):
         self.assertEqual(len({metric["icon_height"] for metric in row_metrics}), 1)
         self.assertEqual(len({metric["icon_column_width"] for metric in row_metrics}), 1)
         self.assertTrue(all(metric["icon_width"] <= metric["icon_column_width"] for metric in row_metrics))
+
+    def test_layout_adds_spacing_for_multiline_copyright_row(self):
+        rows = build_overlay_rows(
+            "ILCE-7M5",
+            "Sony α7 V",
+            "FE 200-600mm F5.6-6.3 G OSS + 1.4X Teleconverter",
+            "0.0004",
+            "1/2500",
+            "9",
+            "840",
+            "12800",
+            "2026:07:27 15:42:00",
+            "Mon, 27 Jul 2026",
+            "3:42 PM",
+            "Unknown",
+            "Unknown",
+            "© 2026 Jason Dentler, All Rights Reserved",
+            DEFAULTS,
+        )
+        image = Image.new("RGB", (1080, 1440), "white")
+        draw = ImageDraw.Draw(image)
+        font_size = 60
+        font = ImageFont.truetype(str(FONT_PATH), size=font_size)
+        layout = measure_overlay_rows(draw, rows, font, font_size, str(ICON_DIR))
+        copyright_metric = layout["metrics"][-1]
+        single_line_metric = next(
+            metric for metric in layout["metrics"] if metric["type"] == "row"
+        )
+
+        self.assertEqual(
+            copyright_metric["multiline_spacing"], get_multiline_spacing(font_size)
+        )
+        self.assertGreater(copyright_metric["height"], single_line_metric["height"])
 
     def test_backdrop_color_flips_for_text_color(self):
         self.assertEqual(get_backdrop_color("black"), (255, 255, 255))
