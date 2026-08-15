@@ -15,3 +15,15 @@ No caption
 
 Alt Text:
 No alt text
+
+Original Image: 20260118-IMG_2243-Pano.jpg
+Hero: 20260118-IMG_2243-Pano_post.jpg
+Settings: 20260118-IMG_2243-Pano_settings.jpg
+Splits:
+20260118-IMG_2243-Pano_split_1.jpg
+20260118-IMG_2243-Pano_split_2.jpg
+20260118-IMG_2243-Pano_split_3.jpg
+20260118-IMG_2243-Pano_split_4.jpg
+20260118-IMG_2243-Pano_split_5.jpg
+20260118-IMG_2243-Pano_split_6.jpg
+20260118-IMG_2243-Pano_split_7.jpg

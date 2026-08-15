@@ -33,6 +33,10 @@ A peaceful afternoon in the Houston Audubon Nature Sanctuary. This Eastern Cotto
 
 Alt Text:
 A rabbit sits on a rock in a wooded area covered in fallen leaves. The rabbit has brown fur with a white underbelly and long ears.
+
+Original Image: 20260106-IMG_3724.jpg
+Hero: 20260106-IMG_3724_post.jpg
+Settings: 20260106-IMG_3724_settings.jpg
 ```
 
 ## Cardinal on Railing
@@ -76,6 +80,13 @@ A vibrant male Northern Cardinal perches on a wooden railing, showcasing its str
 
 Alt Text:
 A male Northern Cardinal stands on a wooden railing against a blurred green background.
+
+Original Image: 20260403-IMG_0022.jpg
+Hero: 20260403-IMG_0022_post.jpg
+Settings: 20260403-IMG_0022_settings.jpg
+Splits:
+20260403-IMG_0022_split_1.jpg
+20260403-IMG_0022_split_2.jpg
 ```
 
 ## Canon EOS R6 Mark III
@@ -110,6 +121,10 @@ No caption
 
 Alt Text:
 No alt text
+
+Original Image: 20260416-DA8A2396.jpg
+Hero: 20260416-DA8A2396_post.jpg
+Settings: 20260416-DA8A2396_settings.jpg
 ```
 
 ## Sony α7 V with Teleconverter
@@ -144,6 +159,10 @@ No caption
 
 Alt Text:
 No alt text
+
+Original Image: 20260727-DSC06191-IG.jpg
+Hero: 20260727-DSC06191-IG_post.jpg
+Settings: 20260727-DSC06191-IG_settings.jpg
 ```
 
 ## Honeybees at Work
@@ -187,6 +206,13 @@ A busy hive of activity! These honeybees are hard at work within their wooden st
 
 Alt Text:
 Close-up of several honeybees (Apis mellifera) on a wooden structure with a mesh screen.
+
+Original Image: 20251226-IMG_4867.jpg
+Hero: 20251226-IMG_4867_post.jpg
+Settings: 20251226-IMG_4867_settings.jpg
+Splits:
+20251226-IMG_4867_split_1.jpg
+20251226-IMG_4867_split_2.jpg
 ```
 
 ## Wide Panorama
@@ -250,4 +276,16 @@ No caption
 
 Alt Text:
 No alt text
+
+Original Image: 20260118-IMG_2243-Pano.jpg
+Hero: 20260118-IMG_2243-Pano_post.jpg
+Settings: 20260118-IMG_2243-Pano_settings.jpg
+Splits:
+20260118-IMG_2243-Pano_split_1.jpg
+20260118-IMG_2243-Pano_split_2.jpg
+20260118-IMG_2243-Pano_split_3.jpg
+20260118-IMG_2243-Pano_split_4.jpg
+20260118-IMG_2243-Pano_split_5.jpg
+20260118-IMG_2243-Pano_split_6.jpg
+20260118-IMG_2243-Pano_split_7.jpg
 ```

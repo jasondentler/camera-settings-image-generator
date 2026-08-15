@@ -121,6 +121,15 @@ class ProcessorTests(unittest.TestCase):
                 "🔍 Lens: FE 200-600mm F5.6-6.3 G OSS + 1.4X Teleconverter",
                 output_text_content,
             )
+            self.assertTrue(
+                output_text_content.endswith(
+                    "\n"
+                    "Original Image: sony.jpg\n"
+                    "Hero: sony_post.jpg\n"
+                    "Settings: sony_settings.jpg\n"
+                )
+            )
+            self.assertNotIn("Splits:", output_text_content)
             self.assertNotIn("Copyright", output_text_content)
             self.assertTrue(
                 any(
@@ -189,6 +198,19 @@ class ProcessorTests(unittest.TestCase):
             self.assertEqual(image_size(metadata_image), (1600, 2000))
             self.assertEqual(image_size(split_1), (800, 1000))
             self.assertEqual(image_size(split_2), (800, 1000))
+
+            output_text_content = (Path(temp_dir) / "landscape.txt").read_text()
+            self.assertTrue(
+                output_text_content.endswith(
+                    "\n"
+                    "Original Image: landscape.jpg\n"
+                    "Hero: landscape_post.jpg\n"
+                    "Settings: landscape_settings.jpg\n"
+                    "Splits:\n"
+                    "landscape_split_1.jpg\n"
+                    "landscape_split_2.jpg\n"
+                )
+            )
 
 
 if __name__ == "__main__":

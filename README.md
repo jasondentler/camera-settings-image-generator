@@ -51,6 +51,13 @@ A vibrant male Northern Cardinal perches on a wooden railing, showcasing its str
 
 Alt Text:
 A male Northern Cardinal stands on a wooden railing against a blurred green background.
+
+Original Image: 20260403-IMG_0022.jpg
+Hero: 20260403-IMG_0022_post.jpg
+Settings: 20260403-IMG_0022_settings.jpg
+Splits:
+20260403-IMG_0022_split_1.jpg
+20260403-IMG_0022_split_2.jpg
 ```
 
 See [Samples.md](./Samples.md) for more examples.

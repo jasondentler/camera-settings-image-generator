@@ -284,6 +284,8 @@ def process_photo(input_path):
         category = classify_aspect_ratio(*img.size)
         metadata_image = img
         generated_images = []
+        post_image_path = None
+        split_image_paths = []
 
         if needs_post_image(*img.size):
             post_image_path = f"{base_name}_post.jpg"
@@ -306,6 +308,7 @@ def process_photo(input_path):
                 save_jpeg(split_image, split_image_path)
                 copy_metadata(input_path, split_image_path)
                 generated_images.append(split_image_path)
+                split_image_paths.append(split_image_path)
 
         output_image = f"{base_name}_settings.jpg"
         generate_metadata_image(
@@ -336,6 +339,15 @@ def process_photo(input_path):
             f.write(f"Caption:\n{caption}\n")
             f.write("\n")
             f.write(f"Alt Text:\n{alt_text}\n")
+            f.write("\n")
+            f.write(f"Original Image: {os.path.basename(input_path)}\n")
+            if post_image_path:
+                f.write(f"Hero: {os.path.basename(post_image_path)}\n")
+            f.write(f"Settings: {os.path.basename(output_image)}\n")
+            if split_image_paths:
+                f.write("Splits:\n")
+                for split_image_path in split_image_paths:
+                    f.write(f"{os.path.basename(split_image_path)}\n")
 
         for generated_image in generated_images:
             print(f"✅ Generated: {generated_image}")
