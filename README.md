@@ -11,7 +11,7 @@ A Python command-line application that takes a JPEG image, extracts its EXIF met
 ## Samples
 
 <img src="./samples/20260403-IMG_0022.jpg"  width="45%" />
-<img src="./samples/20260403-IMG_0022_blurred.jpg"  width="45%" />
+<img src="./samples/20260403-IMG_0022_settings.jpg"  width="45%" />
 
 ```
 Title: Cardinal on Railing
@@ -63,7 +63,7 @@ Run the script from the project root and pass the path to your JPEG file:
 python3 src/main.py path/to/your/photo.jpg
 ```
 
-This will output a new file named `[original_filename]_blurred.jpg` in the same directory. It will also output `[original_filename].txt` containing important exif data for writing a social media post.
+This will output social-ready image files in the same directory. All images get `[original_filename]_settings.jpg`. Square and landscape images also get a 4:5 `[original_filename]_post.jpg`. Landscape images also get numbered `[original_filename]_split_N.jpg` files. It will also output `[original_filename].txt` containing important exif data for writing a social media post.
 
 To run it on an entire folder:
 

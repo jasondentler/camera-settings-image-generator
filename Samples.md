@@ -3,7 +3,7 @@
 ## Cottontail on a Rock
 
 <img src="./samples/20260106-IMG_3724.jpg" width="45%" />
-<img src="./samples/20260106-IMG_3724_blurred.jpg"  width="45%" />
+<img src="./samples/20260106-IMG_3724_settings.jpg"  width="45%" />
 
 ```
 Title: Cottontail on a Rock
@@ -28,7 +28,10 @@ A rabbit sits on a rock in a wooded area covered in fallen leaves. The rabbit ha
 ## Cardinal on Railing
 
 <img src="./samples/20260403-IMG_0022.jpg"  width="45%" />
-<img src="./samples/20260403-IMG_0022_blurred.jpg"  width="45%" />
+<img src="./samples/20260403-IMG_0022_post.jpg"  width="45%" />
+<img src="./samples/20260403-IMG_0022_settings.jpg"  width="45%" />
+<img src="./samples/20260403-IMG_0022_split_1.jpg"  width="45%" />
+<img src="./samples/20260403-IMG_0022_split_2.jpg"  width="45%" />
 
 ```
 Title: Cardinal on Railing
@@ -53,7 +56,7 @@ A male Northern Cardinal stands on a wooden railing against a blurred green back
 ## Canon EOS R6 Mark III
 
 <img src="./samples/20260416-DA8A2396.jpg"  width="45%" />
-<img src="./samples/20260416-DA8A2396_blurred.jpg"  width="45%" />
+<img src="./samples/20260416-DA8A2396_settings.jpg"  width="45%" />
 
 ```
 Title: No title
@@ -77,7 +80,7 @@ No alt text
 ## Sony α7 V with Teleconverter
 
 <img src="./samples/20260727-DSC06191-IG.jpg"  width="45%" />
-<img src="./samples/20260727-DSC06191-IG_blurred.jpg"  width="45%" />
+<img src="./samples/20260727-DSC06191-IG_settings.jpg"  width="45%" />
 
 ```
 Title: No title
@@ -101,7 +104,10 @@ No alt text
 ## Honeybees at Work
 
 <img src="./samples/20251226-IMG_4867.jpg" width="45%" />
-<img src="./samples/20251226-IMG_4867_blurred.jpg"  width="45%" />
+<img src="./samples/20251226-IMG_4867_post.jpg"  width="45%" />
+<img src="./samples/20251226-IMG_4867_settings.jpg"  width="45%" />
+<img src="./samples/20251226-IMG_4867_split_1.jpg"  width="45%" />
+<img src="./samples/20251226-IMG_4867_split_2.jpg"  width="45%" />
 
 ```
 Title: Honeybees at Work
@@ -121,4 +127,37 @@ A busy hive of activity! These honeybees are hard at work within their wooden st
 
 Alt Text:
 Close-up of several honeybees (Apis mellifera) on a wooden structure with a mesh screen.
+```
+
+## Wide Panorama
+
+<img src="./samples/20260118-IMG_2243-Pano.jpg" width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_post.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_settings.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_1.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_2.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_3.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_4.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_5.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_6.jpg"  width="45%" />
+<img src="./samples/20260118-IMG_2243-Pano_split_7.jpg"  width="45%" />
+
+```
+Title: No title
+📸 Camera: Canon EOS R50
+🔍 Lens: RF16mm F2.8 STM
+⏱️ Shutter Speed: 30.0s
+  Aperture: ƒ/2.8
+💡 ISO 1000
+📏 Focal Length: 16mm
+📅 Date: Sun, 18 Jan 2026
+🕐 Time: 8:26 PM
+📍 Location: 28° 51' 23.97" N, 97° 10' 11.72" W
+🗺️ View on Map: https://google.com/maps?q=28.8566583333333,-97.1699216666667
+
+Caption:
+No caption
+
+Alt Text:
+No alt text
 ```

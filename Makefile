@@ -1,6 +1,6 @@
 PYTHON ?= .venv/bin/python
 PIP ?= .venv/bin/pip
-SAMPLES := $(filter-out %_blurred.jpg,$(wildcard samples/*.jpg))
+SAMPLES := $(shell find samples -type f -name '*.jpg' ! -name '*_blurred.jpg' ! -name '*_settings.jpg' ! -name '*_post.jpg' ! -name '*_split_*.jpg' | sort)
 
 .PHONY: help install check test samples
 
