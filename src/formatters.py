@@ -127,5 +127,7 @@ def format_copyright_display_name(copyright_notice):
     if not isinstance(copyright_notice, str):
         return copyright_notice
 
-    copyright_notice = re.sub(r"^\s*©\s*", "", copyright_notice)
-    return re.sub(r",\s+(?=All Rights Reserved\b)", ",\n", copyright_notice)
+    copyright_notice = re.sub(r"^\s*Copyright\s+", "", copyright_notice)
+    copyright_notice = re.sub(r"\s*©\s*", " ", copyright_notice).strip()
+    copyright_notice = re.sub(r"\s+", " ", copyright_notice)
+    return re.sub(r",?\s+(?=All Rights Reserved\b)", ",\n", copyright_notice)

@@ -97,3 +97,28 @@ No caption
 Alt Text:
 No alt text
 ```
+
+## Honeybees at Work
+
+<img src="./samples/20251226-IMG_4867.jpg" width="45%" />
+<img src="./samples/20251226-IMG_4867_blurred.jpg"  width="45%" />
+
+```
+Title: Honeybees at Work
+📸 Camera: Canon EOS R50
+🔍 Lens: RF100-400mm F5.6-8 IS USM
+⏱️ Shutter Speed: 1/1600s
+  Aperture: ƒ/9
+💡 ISO 2000
+📏 Focal Length: 400mm
+📅 Date: Fri, 26 Dec 2025
+🕐 Time: 10:32 AM
+📍 Location: 28° 51' 25.61" N, 97° 10' 8.15" W
+🗺️ View on Map: https://google.com/maps?q=28.857115,-97.16893
+
+Caption:
+A busy hive of activity! These honeybees are hard at work within their wooden structure. The bees, identified as *Apis mellifera*, are likely foraging or tending to the hive.
+
+Alt Text:
+Close-up of several honeybees (Apis mellifera) on a wooden structure with a mesh screen.
+```

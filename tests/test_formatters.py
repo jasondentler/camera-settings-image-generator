@@ -98,6 +98,12 @@ class FormatterTests(unittest.TestCase):
             format_copyright_display_name("2026 Jason Dentler, All Rights Reserved"),
             "2026 Jason Dentler,\nAll Rights Reserved",
         )
+        self.assertEqual(
+            format_copyright_display_name(
+                "Copyright Jason Dentler © 2025 All Rights Reserved"
+            ),
+            "Jason Dentler 2025,\nAll Rights Reserved",
+        )
 
 
 if __name__ == "__main__":
