@@ -5,5 +5,6 @@ description = "Extracts camera settings and generates a heavily blurred copy wit
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "Pillow>=10.0.0"
+    "Pillow>=10.0.0",
+    "aggdraw>=1.4.1"
 ]

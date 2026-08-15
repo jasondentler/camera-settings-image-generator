@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Date and time">
+  <title>Date and time</title>
+  <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="32" cy="32" r="21"/>
+    <path d="M32 32V20M32 32l8 5"/>
+  </g>
+</svg>

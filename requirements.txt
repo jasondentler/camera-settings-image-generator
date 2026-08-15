@@ -1,2 +1,3 @@
 Pillow>=10.0.0
 pyexiftool>=0.5.5
+aggdraw>=1.4.1
