@@ -11,6 +11,7 @@ from src.processor import (
     classify_aspect_ratio,
     get_landscape_split_count,
     make_4_5_portrait_image,
+    needs_post_image,
     process_photo,
     split_landscape_image,
 )
@@ -63,6 +64,12 @@ class ProcessorTests(unittest.TestCase):
         self.assertEqual(classify_aspect_ratio(1200, 1200), "square")
         self.assertEqual(classify_aspect_ratio(1920, 1080), "landscape")
 
+    def test_post_image_is_needed_for_square_landscape_and_4_5_portrait(self):
+        self.assertTrue(needs_post_image(800, 1000))
+        self.assertTrue(needs_post_image(900, 1600))
+        self.assertTrue(needs_post_image(1200, 1200))
+        self.assertTrue(needs_post_image(1600, 1000))
+
     def test_4_5_post_image_caps_extreme_landscape_width(self):
         image = Image.new("RGB", (4000, 1000), (180, 200, 210))
 
@@ -88,21 +95,26 @@ class ProcessorTests(unittest.TestCase):
         self.assertEqual([split.size for split in splits], [(800, 1000)] * 2)
 
     @patch("src.processor.exiftool.ExifToolHelper", FakeExifToolHelper)
-    def test_process_photo_writes_portrait_outputs_and_preserves_raw_companion_text(self):
+    def test_process_photo_copies_exact_4_5_portrait_post_image(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             input_path = Path(temp_dir) / "sony.jpg"
-            Image.new("RGB", (1080, 1440), (180, 200, 210)).save(input_path)
+            Image.new("RGB", (800, 1000), (180, 200, 210)).save(input_path)
+            input_content = input_path.read_bytes()
 
             with contextlib.redirect_stdout(io.StringIO()):
                 process_photo(str(input_path))
 
+            post_image = Path(temp_dir) / "sony_post.jpg"
             output_image = Path(temp_dir) / "sony_settings.jpg"
             output_text = Path(temp_dir) / "sony.txt"
             output_text_content = output_text.read_text()
 
+            self.assertTrue(post_image.exists())
             self.assertTrue(output_image.exists())
-            self.assertFalse((Path(temp_dir) / "sony_post.jpg").exists())
             self.assertFalse((Path(temp_dir) / "sony_blurred.jpg").exists())
+            self.assertEqual(post_image.read_bytes(), input_content)
+            self.assertEqual(image_size(post_image), (800, 1000))
+            self.assertEqual(image_size(output_image), (800, 1000))
             self.assertTrue(output_text.exists())
             self.assertIn("📸 Camera: ILCE-7M5", output_text_content)
             self.assertIn(
@@ -117,6 +129,24 @@ class ProcessorTests(unittest.TestCase):
                     if instance.execute_args
                 )
             )
+
+    @patch("src.processor.exiftool.ExifToolHelper", FakeExifToolHelper)
+    def test_process_photo_pads_skinny_portrait_before_metadata_output(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            input_path = Path(temp_dir) / "skinny.jpg"
+            Image.new("RGB", (900, 1600), (180, 200, 210)).save(input_path)
+
+            with contextlib.redirect_stdout(io.StringIO()):
+                process_photo(str(input_path))
+
+            post_image = Path(temp_dir) / "skinny_post.jpg"
+            metadata_image = Path(temp_dir) / "skinny_settings.jpg"
+
+            self.assertTrue(post_image.exists())
+            self.assertTrue(metadata_image.exists())
+            self.assertFalse((Path(temp_dir) / "skinny_blurred.jpg").exists())
+            self.assertEqual(image_size(post_image), (1280, 1600))
+            self.assertEqual(image_size(metadata_image), (1280, 1600))
 
     @patch("src.processor.exiftool.ExifToolHelper", FakeExifToolHelper)
     def test_process_photo_pads_square_image_before_metadata_output(self):

@@ -2,8 +2,18 @@
 
 ## Cottontail on a Rock
 
+<figure>
 <img src="./samples/20260106-IMG_3724.jpg" width="45%" />
+<figcaption><code>20260106-IMG_3724.jpg</code></figcaption>
+</figure>
+<figure>
+<img src="./samples/20260106-IMG_3724_post.jpg"  width="45%" />
+<figcaption><code>20260106-IMG_3724_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260106-IMG_3724_settings.jpg"  width="45%" />
+<figcaption><code>20260106-IMG_3724_settings.jpg</code></figcaption>
+</figure>
 
 ```
 Title: Cottontail on a Rock
@@ -27,11 +37,26 @@ A rabbit sits on a rock in a wooded area covered in fallen leaves. The rabbit ha
 
 ## Cardinal on Railing
 
+<figure>
 <img src="./samples/20260403-IMG_0022.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260403-IMG_0022_post.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260403-IMG_0022_settings.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_settings.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260403-IMG_0022_split_1.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_split_1.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260403-IMG_0022_split_2.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_split_2.jpg</code></figcaption>
+</figure>
 
 ```
 Title: Cardinal on Railing
@@ -55,8 +80,18 @@ A male Northern Cardinal stands on a wooden railing against a blurred green back
 
 ## Canon EOS R6 Mark III
 
+<figure>
 <img src="./samples/20260416-DA8A2396.jpg"  width="45%" />
+<figcaption><code>20260416-DA8A2396.jpg</code></figcaption>
+</figure>
+<figure>
+<img src="./samples/20260416-DA8A2396_post.jpg"  width="45%" />
+<figcaption><code>20260416-DA8A2396_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260416-DA8A2396_settings.jpg"  width="45%" />
+<figcaption><code>20260416-DA8A2396_settings.jpg</code></figcaption>
+</figure>
 
 ```
 Title: No title
@@ -79,8 +114,18 @@ No alt text
 
 ## Sony α7 V with Teleconverter
 
+<figure>
 <img src="./samples/20260727-DSC06191-IG.jpg"  width="45%" />
+<figcaption><code>20260727-DSC06191-IG.jpg</code></figcaption>
+</figure>
+<figure>
+<img src="./samples/20260727-DSC06191-IG_post.jpg"  width="45%" />
+<figcaption><code>20260727-DSC06191-IG_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260727-DSC06191-IG_settings.jpg"  width="45%" />
+<figcaption><code>20260727-DSC06191-IG_settings.jpg</code></figcaption>
+</figure>
 
 ```
 Title: No title
@@ -103,11 +148,26 @@ No alt text
 
 ## Honeybees at Work
 
+<figure>
 <img src="./samples/20251226-IMG_4867.jpg" width="45%" />
+<figcaption><code>20251226-IMG_4867.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20251226-IMG_4867_post.jpg"  width="45%" />
+<figcaption><code>20251226-IMG_4867_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20251226-IMG_4867_settings.jpg"  width="45%" />
+<figcaption><code>20251226-IMG_4867_settings.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20251226-IMG_4867_split_1.jpg"  width="45%" />
+<figcaption><code>20251226-IMG_4867_split_1.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20251226-IMG_4867_split_2.jpg"  width="45%" />
+<figcaption><code>20251226-IMG_4867_split_2.jpg</code></figcaption>
+</figure>
 
 ```
 Title: Honeybees at Work
@@ -131,16 +191,46 @@ Close-up of several honeybees (Apis mellifera) on a wooden structure with a mesh
 
 ## Wide Panorama
 
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano.jpg" width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_post.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_settings.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_settings.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_1.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_1.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_2.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_2.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_3.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_3.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_4.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_4.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_5.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_5.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_6.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_6.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260118-IMG_2243-Pano_split_7.jpg"  width="45%" />
+<figcaption><code>20260118-IMG_2243-Pano_split_7.jpg</code></figcaption>
+</figure>
 
 ```
 Title: No title

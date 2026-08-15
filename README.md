@@ -10,8 +10,28 @@ A Python command-line application that takes a JPEG image, extracts its EXIF met
 
 ## Samples
 
+## Cardinal on Railing
+
+<figure>
 <img src="./samples/20260403-IMG_0022.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022.jpg</code></figcaption>
+</figure>
+<figure>
+<img src="./samples/20260403-IMG_0022_post.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_post.jpg</code></figcaption>
+</figure>
+<figure>
 <img src="./samples/20260403-IMG_0022_settings.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_settings.jpg</code></figcaption>
+</figure>
+<figure>
+<img src="./samples/20260403-IMG_0022_split_1.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_split_1.jpg</code></figcaption>
+</figure>
+<figure>
+<img src="./samples/20260403-IMG_0022_split_2.jpg"  width="45%" />
+<figcaption><code>20260403-IMG_0022_split_2.jpg</code></figcaption>
+</figure>
 
 ```
 Title: Cardinal on Railing
@@ -63,7 +83,7 @@ Run the script from the project root and pass the path to your JPEG file:
 python3 src/main.py path/to/your/photo.jpg
 ```
 
-This will output social-ready image files in the same directory. All images get `[original_filename]_settings.jpg`. Square and landscape images also get a 4:5 `[original_filename]_post.jpg`. Landscape images also get numbered `[original_filename]_split_N.jpg` files. It will also output `[original_filename].txt` containing important exif data for writing a social media post.
+This will output social-ready image files in the same directory. All images get `[original_filename]_settings.jpg`. Square, landscape, and portrait images that are 4:5 or skinnier also get a 4:5 `[original_filename]_post.jpg`; exact 4:5 portrait posts are copied from the original, and skinnier portrait posts use left/right padding. Landscape images also get numbered `[original_filename]_split_N.jpg` files. Wide panoramas are split into as many near-4:5 images as practical. Split images do not add padding between adjacent splits; padding is added to the top and bottom where possible, and any required side padding is limited to the left edge of the first split and the right edge of the last split. It will also output `[original_filename].txt` containing important exif data for writing a social media post.
 
 To run it on an entire folder:
 

@@ -7,7 +7,9 @@
 #     http://www.apache.org/licenses/LICENSE-2.0
 
 import glob
+import math
 import os
+import shutil
 
 import exiftool
 from PIL import Image, ImageDraw, ImageFilter, ImageOps
@@ -43,6 +45,15 @@ def classify_aspect_ratio(width, height):
     return "portrait"
 
 
+def needs_post_image(width, height):
+    category = classify_aspect_ratio(width, height)
+    return category in ("square", "landscape") or width / height <= TARGET_PORTRAIT_RATIO
+
+
+def is_exact_4_5_portrait(width, height):
+    return width < height and width * 5 == height * 4
+
+
 def make_4_5_portrait_image(image):
     image = image.convert("RGB")
     width, height = image.size
@@ -52,9 +63,9 @@ def make_4_5_portrait_image(image):
         width, height = image.size
 
     if width / height > TARGET_PORTRAIT_RATIO:
-        canvas_size = (width, round(width / TARGET_PORTRAIT_RATIO))
+        canvas_size = (width, math.ceil(width / TARGET_PORTRAIT_RATIO))
     else:
-        canvas_size = (round(height * TARGET_PORTRAIT_RATIO), height)
+        canvas_size = (math.ceil(height * TARGET_PORTRAIT_RATIO), height)
 
     background = ImageOps.fit(image, canvas_size, method=Image.Resampling.LANCZOS)
     background = background.filter(ImageFilter.GaussianBlur(radius=40)).convert("RGB")
@@ -274,11 +285,15 @@ def process_photo(input_path):
         metadata_image = img
         generated_images = []
 
-        if category in ("square", "landscape"):
-            post_image = make_4_5_portrait_image(img)
+        if needs_post_image(*img.size):
             post_image_path = f"{base_name}_post.jpg"
-            save_jpeg(post_image, post_image_path)
-            copy_metadata(input_path, post_image_path)
+            if is_exact_4_5_portrait(*img.size):
+                shutil.copyfile(input_path, post_image_path)
+                post_image = img
+            else:
+                post_image = make_4_5_portrait_image(img)
+                save_jpeg(post_image, post_image_path)
+                copy_metadata(input_path, post_image_path)
             generated_images.append(post_image_path)
             metadata_image = post_image
 
