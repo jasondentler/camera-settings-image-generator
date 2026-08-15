@@ -92,7 +92,7 @@ def process_photo(input_path):
 
         img = Image.open(input_path)
         img_w, img_h = img.size
-        blurred_img = img.filter(ImageFilter.GaussianBlur(radius=40))
+        blurred_img = img.filter(ImageFilter.GaussianBlur(radius=40)).convert("RGBA")
         draw = ImageDraw.Draw(blurred_img)
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -136,7 +136,7 @@ def process_photo(input_path):
             )
 
         output_image = f"{base_name}_blurred.jpg"
-        blurred_img.save(output_image)
+        blurred_img.convert("RGB").save(output_image)
 
         with exiftool.ExifToolHelper() as et:
             et.execute(

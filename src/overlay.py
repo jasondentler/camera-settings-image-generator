@@ -8,7 +8,7 @@
 
 import os
 
-from PIL import ImageFont
+from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
 
 from src.formatters import split_lens_extender
 from src.svg_icons import get_icon_aspect, render_svg_icon
@@ -123,7 +123,57 @@ def get_optimized_overlay_font(draw, rows, img_w, img_h, font_path, icon_dir):
     return last_safe_font, last_safe_size, last_safe_layout
 
 
+def get_backdrop_color(font_color):
+    if ImageColor.getrgb(font_color)[:3] == (0, 0, 0):
+        return (255, 255, 255, 118)
+
+    return (0, 0, 0, 118)
+
+
+def draw_overlay_backdrop(image, rows, layout, x, y, font, font_color, icon_dir):
+    mask = Image.new("L", image.size, 0)
+    mask_draw = ImageDraw.Draw(mask)
+    current_y = y
+
+    for i, metric in enumerate(layout["metrics"]):
+        if i > 0:
+            current_y += layout["row_gap"]
+
+        if metric["type"] == "divider":
+            line_y = current_y + metric["margin"]
+            mask_draw.line(
+                (x, line_y, x + layout["width"], line_y),
+                fill=160,
+                width=metric["line_height"],
+            )
+            current_y += metric["height"]
+            continue
+
+        row = metric["row"]
+        icon_path = os.path.join(icon_dir, row["icon"])
+        icon = render_svg_icon(icon_path, metric["icon_height"], "white")
+        icon_x = x + (metric["icon_column_width"] - icon.width) // 2
+        icon_y = current_y + (metric["height"] - icon.height) // 2
+        mask.paste(icon.getchannel("A"), (icon_x, icon_y), icon.getchannel("A"))
+
+        text_x = x + metric["icon_column_width"] + metric["icon_gap"]
+        text_y = (
+            current_y
+            + (metric["height"] - metric["visual_text_height"]) // 2
+            - metric["bbox"][1]
+        )
+        mask_draw.text((text_x, text_y), row["text"], fill=255, font=font)
+        current_y += metric["height"]
+
+    blur_radius = max(4, int(layout["row_gap"] * 0.45))
+    blurred_mask = mask.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+    backdrop = Image.new("RGBA", image.size, get_backdrop_color(font_color))
+    backdrop.putalpha(blurred_mask.point(lambda px: min(130, int(px * 0.7))))
+    image.alpha_composite(backdrop)
+
+
 def draw_overlay_rows(image, draw, rows, layout, x, y, font, font_color, icon_dir):
+    draw_overlay_backdrop(image, rows, layout, x, y, font, font_color, icon_dir)
     current_y = y
 
     for i, metric in enumerate(layout["metrics"]):
