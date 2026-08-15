@@ -38,6 +38,19 @@ APP_NAME, APP_VERSION = get_project_metadata()
 APP_STRING = f"{APP_NAME} v{APP_VERSION}"
 
 
+CAMERA_MODEL_DISPLAY_NAMES = {
+    "ILCE-7M5": "Sony α7 V",
+}
+
+
+def format_camera_model(camera):
+    """Returns the user-facing camera model name."""
+    if not isinstance(camera, str):
+        return camera
+
+    return CAMERA_MODEL_DISPLAY_NAMES.get(camera.strip(), camera)
+
+
 def get_text_color(image):
     """Calculates image brightness to select a high-contrast font color."""
     small_img = image.resize((1, 1))
@@ -174,7 +187,7 @@ def process_photo(input_path):
         default_title = "No title"
 
         # Extract all your highly-specific requested fields safely
-        camera = metadata.get("EXIF:Model", default_camera)
+        camera = format_camera_model(metadata.get("EXIF:Model", default_camera))
         lens = metadata.get("EXIF:LensId", metadata.get("EXIF:LensModel", default_lens))
         raw_shutter = metadata.get("EXIF:ExposureTime", default_raw_shutter)
         shutter = format_shutter(raw_shutter)
