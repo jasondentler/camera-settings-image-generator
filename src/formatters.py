@@ -102,3 +102,21 @@ def split_lens_extender(lens):
             return lens[: match.start()].strip(), match.group(1).strip()
 
     return lens, ""
+
+
+def format_gear_display_name(name):
+    """Formats lens/extender names for the image overlay."""
+    if not isinstance(name, str):
+        return name
+
+    name = re.sub(r"\bRF(?=\d)", "RF ", name)
+    name = re.sub(
+        r"\b[Ff]/?(?=\d+(?:\.\d+)?(?:-\d+(?:\.\d+)?)?)", "ƒ/", name
+    )
+    name = re.sub(r"\b(\d+(?:\.\d+)?)X(?=\s+Teleconverter\b)", r"\1x", name)
+
+    def pascal_case_long_word(match):
+        word = match.group(0)
+        return word[0].upper() + word[1:].lower()
+
+    return re.sub(r"\b[A-Za-z]{4,}\b", pascal_case_long_word, name)

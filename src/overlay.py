@@ -10,8 +10,12 @@ import os
 
 from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
 
-from src.formatters import split_lens_extender
+from src.formatters import format_gear_display_name, split_lens_extender
 from src.svg_icons import get_icon_aspect, render_svg_icon
+
+
+BACKDROP_MAX_ALPHA = 210
+BACKDROP_ALPHA_MULTIPLIER = 0.95
 
 
 def get_text_color(image):
@@ -125,9 +129,13 @@ def get_optimized_overlay_font(draw, rows, img_w, img_h, font_path, icon_dir):
 
 def get_backdrop_color(font_color):
     if ImageColor.getrgb(font_color)[:3] == (0, 0, 0):
-        return (255, 255, 255, 118)
+        return (255, 255, 255)
 
-    return (0, 0, 0, 118)
+    return (0, 0, 0)
+
+
+def get_backdrop_alpha(mask_alpha):
+    return min(BACKDROP_MAX_ALPHA, int(mask_alpha * BACKDROP_ALPHA_MULTIPLIER))
 
 
 def draw_overlay_backdrop(image, rows, layout, x, y, font, font_color, icon_dir):
@@ -167,8 +175,8 @@ def draw_overlay_backdrop(image, rows, layout, x, y, font, font_color, icon_dir)
 
     blur_radius = max(4, int(layout["row_gap"] * 0.45))
     blurred_mask = mask.filter(ImageFilter.GaussianBlur(radius=blur_radius))
-    backdrop = Image.new("RGBA", image.size, get_backdrop_color(font_color))
-    backdrop.putalpha(blurred_mask.point(lambda px: min(130, int(px * 0.7))))
+    backdrop = Image.new("RGBA", image.size, (*get_backdrop_color(font_color), 0))
+    backdrop.putalpha(blurred_mask.point(get_backdrop_alpha))
     image.alpha_composite(backdrop)
 
 
@@ -239,7 +247,7 @@ def build_overlay_rows(
         settings_rows.append({"icon": "focal-length.svg", "text": f"{focal}mm"})
 
     if raw_date and raw_date != defaults["raw_date"]:
-        date_time = " ".join(part for part in [clean_time, clean_date] if part)
+        date_time = " ".join(part for part in [clean_date, clean_time] if part)
         if date_time:
             info_rows.append({"icon": "date-time.svg", "text": date_time})
 
@@ -251,9 +259,16 @@ def build_overlay_rows(
 
     if lens and lens != defaults["lens"]:
         lens_name, extender = split_lens_extender(lens)
-        info_rows.append({"icon": "lens-isometric.svg", "text": lens_name})
+        info_rows.append(
+            {"icon": "lens-isometric.svg", "text": format_gear_display_name(lens_name)}
+        )
         if extender:
-            info_rows.append({"icon": "lens-isometric.svg", "text": extender})
+            info_rows.append(
+                {
+                    "icon": "teleconverter.svg",
+                    "text": format_gear_display_name(extender),
+                }
+            )
 
     rows = [*settings_rows]
     if settings_rows and info_rows:

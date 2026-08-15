@@ -19,6 +19,12 @@ Run the source compile check before committing:
 make check
 ```
 
+Run only the unit tests while iterating:
+
+```bash
+make test
+```
+
 Regenerate sample outputs after changing overlay, metadata, formatting, or rendering behavior:
 
 ```bash
